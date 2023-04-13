@@ -19,7 +19,7 @@ def get_clean_text() -> List:
         ']', '<', '>', '!', '?', '/', '\\', '0', '1', '2', '3', '4', '5', '6',
         '7', '8', '9', '"',
     ]
-    with open(BLACKLIST, 'r', newline='') as f:
+    with open(BLACKLIST, 'r', encoding='utf8', newline='') as f:
         table = list(csv.reader(f, delimiter=';'))
     drop_words = [word[0] for word in table]
     trans_table = str.maketrans(dict.fromkeys(drop_symbols, ' '))
@@ -40,7 +40,7 @@ def replase_irregular_verbs(word_list: List) -> Tuple[List, List]:
     """Заменяем в тексте на базовую форму неправильные глаголы."""
     word_list_with_base_form = []
     irregular_verbs = []
-    with open(IRREGULAR_VERB, 'r', newline='') as f:
+    with open(IRREGULAR_VERB, 'r', encoding='utf8', newline='') as f:
         table = list(csv.reader(f, delimiter=';'))
     for word in word_list:
         is_irregular = False
@@ -53,8 +53,6 @@ def replase_irregular_verbs(word_list: List) -> Tuple[List, List]:
         if is_irregular:
             continue
         word_list_with_base_form.append(word)
-    print(f'Всего слов без всякой ерунды: {len(word_list_with_base_form)}')
-    print(f'Неправильных глаголов: {len(set(irregular_verbs))}')
     return (word_list_with_base_form, irregular_verbs)
 
 
@@ -72,7 +70,7 @@ def get_count_world(world_list: List) -> Dict:
 
 def get_out_of_vocabulary(words_dict: Dict) -> Tuple[List, List]:
     """ Получаем слова  """
-    with open(YOUR_VOCABULARY, 'r', newline='') as f:
+    with open(YOUR_VOCABULARY, 'r', encoding='utf8', newline='') as f:
         table = list(csv.reader(f, delimiter=';'))
     new_words = {}
     vocabulary_words = {}
@@ -85,7 +83,7 @@ def get_out_of_vocabulary(words_dict: Dict) -> Tuple[List, List]:
                 break
         if not in_vocabulary:
             new_words[word] = words_dict[word]
-    with open(OUTPUT, 'w', newline='') as f:
+    with open(OUTPUT, 'w', encoding='utf8', newline='') as f:
         writer = csv.writer(f, delimiter=';')
         writer.writerow(['word', 'qt', 'description'])
         for key, val in words_dict.items():
