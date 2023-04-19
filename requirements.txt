@@ -1,2 +1,10 @@
-flake8
-python-dotenv
+beautifulsoup4==4.12.2
+EbookLib==0.18
+flake8==6.0.0
+lxml==4.9.2
+mccabe==0.7.0
+pkg_resources==0.0.0
+pycodestyle==2.10.0
+pyflakes==3.0.1
+six==1.16.0
+soupsieve==2.4
